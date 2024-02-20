@@ -1,5 +1,12 @@
 import axios from 'axios'
 import requests, json
+class Grade:
+    def on_get(self, req, resp):
+        grade = lookup_grade(req.params["subjectID"], req.params["studentID"])
+        resp.media = grade
+
+app = falcon.App()
+app.add_route("/grades", Grade())
 
 for id in range(1111,9999):
     response = requests.get('https://api.grades.patch.edu/grades?subjectID=1293&studentID=2022' + str(id))
